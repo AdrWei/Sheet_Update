@@ -55,7 +55,7 @@ jobs:
       - name: Run Python script
         env:
           SHEET_ID: ${{ secrets.SHEET_ID }}
-        run: python your_script_name.py
+        run: python Update_Sheet.py
 
       - name: Remove credentials file
         run: rm credentials.json
