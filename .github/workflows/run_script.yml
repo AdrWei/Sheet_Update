@@ -1,9 +1,6 @@
 name: Run R Script and Update Google Sheets
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
