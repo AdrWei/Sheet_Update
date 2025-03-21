@@ -43,31 +43,31 @@ try:
 
     # 处理 orderWeb 工作表
     try:
-        sheet = spreadsheet.worksheet("orderWeb")  # 尝试获取名为 "orderWeb" 的工作表
+        sheet = spreadsheet.worksheet("orderWeb")
     except gspread.exceptions.WorksheetNotFound:
-        sheet = spreadsheet.add_worksheet(title="orderWeb", rows=100, cols=20)  # 如果不存在，创建新工作表
-
-    # 读取现有数据
-    existing_data = sheet.get_all_values()
-    existing_df = pd.DataFrame(existing_data[1:], columns=existing_data[0])
-
-    # 用新的 DataFrame 更新前四列
-    if not existing_df.empty:  # 确保 Google Sheet 中有数据
-        existing_df.iloc[:, :len(df_web.columns)] = df_web.values  # 更新前四列
-    else:  # 如果 Google Sheet 为空，则直接写入新的 DataFrame
-        existing_df = df_web
-
-    # 清空并写入更新后的数据
+        sheet = spreadsheet.add_worksheet(title="orderWeb", rows=100, cols=20)
+    existing_web_data = sheet.get_all_values()
+    existing_web_df = pd.DataFrame(existing_web_data[1:], columns=existing_web_data[0])
+    if not existing_web_df.empty:
+        existing_web_df.iloc[:, :len(df_web.columns)] = df_web.values
+    else:
+        existing_web_df = df_web
     sheet.clear()
-    sheet.update([existing_df.columns.values.tolist()] + existing_df.values.tolist())
+    sheet.update([existing_web_df.columns.values.tolist()] + existing_web_df.values.tolist())
 
-    # 处理 orderSocial 工作表（保持不变）
+    # 处理 orderSocial 工作表
     try:
-        sheet = spreadsheet.worksheet("orderSocial")  # 尝试获取名为 "orderSocial" 的工作表
+        sheet = spreadsheet.worksheet("orderSocial")
     except gspread.exceptions.WorksheetNotFound:
-        sheet = spreadsheet.add_worksheet(title="orderSocial", rows=100, cols=20)  # 如果不存在，创建新工作表
-    sheet.clear()  # 清空现有数据
-    sheet.update([df_social.columns.values.tolist()] + df_social.values.tolist())  # 写入表头和数据
+        sheet = spreadsheet.add_worksheet(title="orderSocial", rows=100, cols=20)
+    existing_social_data = sheet.get_all_values()
+    existing_social_df = pd.DataFrame(existing_social_data[1:], columns=existing_social_data[0])
+    if not existing_social_df.empty:
+        existing_social_df.iloc[:, :len(df_social.columns)] = df_social.values
+    else:
+        existing_social_df = df_social
+    sheet.clear()
+    sheet.update([existing_social_df.columns.values.tolist()] + existing_social_df.values.tolist())
 
     print("数据成功写入 Google Sheet！")
 except gspread.exceptions.SpreadsheetNotFound as e:
