@@ -49,7 +49,7 @@ try:
     existing_web_data = sheet.get_all_values()
     existing_web_df = pd.DataFrame(existing_web_data[1:], columns=existing_web_data[0])
     if not existing_web_df.empty:
-        existing_web_df.iloc[:, :len(df_web.columns)] = df_web.values
+        existing_web_df.iloc[:len(df_web), :len(df_web.columns)] = df_web.values  # 修改这里
     else:
         existing_web_df = df_web
     sheet.clear()
@@ -63,7 +63,7 @@ try:
     existing_social_data = sheet.get_all_values()
     existing_social_df = pd.DataFrame(existing_social_data[1:], columns=existing_social_data[0])
     if not existing_social_df.empty:
-        existing_social_df.iloc[:, :len(df_social.columns)] = df_social.values
+        existing_social_df.iloc[:len(df_social), :len(df_social.columns)] = df_social.values  # 修改这里
     else:
         existing_social_df = df_social
     sheet.clear()
