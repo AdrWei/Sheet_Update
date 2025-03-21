@@ -48,7 +48,7 @@ jobs:
           pip install pandas gspread oauth2client rpy2
 
       - name: Create credentials file
-        run: echo '${{ secrets.GOOGLE_CREDENTIALS_JSON }}' > credentials.json
+        run: echo '${{ secrets.SHEET_KEY }}' > credentials.json
 
       - name: Run Python script
         env:
