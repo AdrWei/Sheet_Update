@@ -9,9 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: LIFISHER_SECRETS # 指定环境名称
-    env:
-      TZ: Asia/Shanghai # 设置时区为北京时间 (UTC+8)
+    environment: Lifisher_Sheet_Secrets # 指定环境名称
 
     steps:
       - name: Checkout repository
